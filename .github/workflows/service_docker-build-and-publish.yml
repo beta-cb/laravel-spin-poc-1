@@ -48,9 +48,9 @@ jobs:
       - if: ${{ steps.composer-vendor-restore.outputs.cache-hit != 'true' }}
         name: Check PWD permissions and path
         run: |
-          echo "Current directory path: $(pwd)"
-          echo "Current directory permissions:"
-          ls -l $(pwd)
+          $DOCKER_COMPOSE_CMD \
+          run \
+          pwd && ls -l
 
       - if: ${{ steps.composer-vendor-restore.outputs.cache-hit != 'true' }}
         name: Install Composer dependencies
