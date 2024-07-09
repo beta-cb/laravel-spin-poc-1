@@ -51,8 +51,7 @@ jobs:
           $DOCKER_COMPOSE_CMD \
           run \
           php \
-          bash -c \
-          "chown -R www-data:www-data /var/www && composer install --optimize-autoloader --no-interaction --no-progress --no-ansi"
+          composer install --optimize-autoloader --no-interaction --no-progress --no-ansi
 
       - name: Set env file
         run: |
