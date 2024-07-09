@@ -45,6 +45,11 @@ jobs:
           php \
           composer show --locked
 
+      - name: Set correct permissions
+        run: |
+          $DOCKER_COMPOSE_CMD run --rm --workdir /var/www/html/ php chown -R www-data:www-data /var/www/html/
+          $DOCKER_COMPOSE_CMD run --rm --workdir /var/www/html/ php chmod -R 775 /var/www/html/
+
       - name: Debug before composer install
         run: |
           echo "Debugging before composer install"
@@ -56,6 +61,7 @@ jobs:
         run: |
           $DOCKER_COMPOSE_CMD \
           run \
+          --user www-data \
           --workdir /var/www/html/ \
           php \
           composer install --optimize-autoloader --no-interaction --no-progress --no-ansi
