@@ -46,13 +46,6 @@ jobs:
           composer show --locked
 
       - if: ${{ steps.composer-vendor-restore.outputs.cache-hit != 'true' }}
-        name: Check PWD permissions and path
-        run: |
-          $DOCKER_COMPOSE_CMD \
-          run \
-          ls -l
-
-      - if: ${{ steps.composer-vendor-restore.outputs.cache-hit != 'true' }}
         name: Install Composer dependencies
         run: |
           $DOCKER_COMPOSE_CMD \

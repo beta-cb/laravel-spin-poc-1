@@ -39,6 +39,7 @@ USER root
 RUN echo "user = www-data" >> /usr/local/etc/php-fpm.d/docker-php-serversideup-pool.conf && \
     echo "group = www-data" >> /usr/local/etc/php-fpm.d/docker-php-serversideup-pool.conf
 COPY --chown=www-data:www-data . /var/www/html
+RUN chmod -R 775 /var/www
 
 ############################################
 # Production Image
