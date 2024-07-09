@@ -14,7 +14,6 @@ services:
       - ci
     volumes:
       - .:/var/www/html/
-    target: ci
     working_dir: /var/www/html/
     environment:
       AUTORUN_ENABLED: false
