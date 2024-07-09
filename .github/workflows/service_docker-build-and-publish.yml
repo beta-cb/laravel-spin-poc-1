@@ -29,10 +29,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set permissions
-        run: |
-          sudo chmod -R 775 $GITHUB_WORKSPACE
-
       - name: Restore composer cache (if available)
         id: composer-vendor-restore
         uses: actions/cache/restore@v3
@@ -55,7 +51,8 @@ jobs:
           $DOCKER_COMPOSE_CMD \
           run \
           php \
-          composer install --optimize-autoloader --no-interaction --no-progress --no-ansi
+          bash -c \
+          "chown -R www-data:www-data /var/www && composer install --optimize-autoloader --no-interaction --no-progress --no-ansi"
 
       - name: Set env file
         run: |
