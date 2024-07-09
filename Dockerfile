@@ -35,10 +35,11 @@ FROM base as ci
 # Sometimes CI images need to run as root
 # so we set the ROOT user and configure
 # the PHP-FPM pool to run as www-data
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 775 /var/www
 USER root
 RUN echo "user = www-data" >> /usr/local/etc/php-fpm.d/docker-php-serversideup-pool.conf && \
     echo "group = www-data" >> /usr/local/etc/php-fpm.d/docker-php-serversideup-pool.conf
-COPY --chown=www-data:www-data . /var/www/html
 USER www-data
 
 ############################################
