@@ -45,13 +45,26 @@ jobs:
           php \
           composer show --locked
 
+      - name: Debug before composer install
+        run: |
+          echo "Debugging before composer install"
+          ls -la
+          $DOCKER_COMPOSE_CMD run php ls -la /var/www/html/
+
       - if: ${{ steps.composer-vendor-restore.outputs.cache-hit != 'true' }}
         name: Install Composer dependencies
         run: |
           $DOCKER_COMPOSE_CMD \
           run \
+          --workdir /var/www/html/ \
           php \
           composer install --optimize-autoloader --no-interaction --no-progress --no-ansi
+
+      - name: Debug after composer install
+        run: |
+          echo "Debugging after composer install"
+          ls -la
+          $DOCKER_COMPOSE_CMD run php ls -la /var/www/html/
 
       - name: Set env file
         run: |
