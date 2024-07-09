@@ -35,9 +35,14 @@ FROM base as ci
 # Sometimes CI images need to run as root
 # so we set the ROOT user and configure
 # the PHP-FPM pool to run as www-data
+ARG USER_ID
+ARG GROUP_ID
+
+# Switch to root so we can set the user ID and group ID
 RUN docker-php-serversideup-set-id www-data $USER_ID:$GROUP_ID  && \
     docker-php-serversideup-set-file-permissions --owner $USER_ID:$GROUP_ID --service nginx
 USER www-data
+
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www
 USER root
