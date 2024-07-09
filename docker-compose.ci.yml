@@ -21,7 +21,6 @@ services:
       AUTORUN_ENABLED: false
     depends_on:
       - mariadb
-    user: www-data
 
   node:
     image: node:20
