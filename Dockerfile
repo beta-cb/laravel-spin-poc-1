@@ -40,7 +40,6 @@ RUN chown -R www-data:www-data /var/www/html \
 USER root
 RUN echo "user = www-data" >> /usr/local/etc/php-fpm.d/docker-php-serversideup-pool.conf && \
     echo "group = www-data" >> /usr/local/etc/php-fpm.d/docker-php-serversideup-pool.conf
-USER www-data
 
 ############################################
 # Production Image
